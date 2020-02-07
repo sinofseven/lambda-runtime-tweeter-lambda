@@ -12,7 +12,7 @@ black:
 format: isort black
 
 clean:
-	find src -name requirements.txt | xargs rm
+	find src -name requirements.txt | xargs rm -f
 
 build: clean
 	poetry install --no-dev
