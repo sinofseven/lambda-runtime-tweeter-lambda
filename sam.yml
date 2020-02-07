@@ -140,7 +140,7 @@ Resources:
               - Effect: Allow
                 Action:
                   - lambda:invoke
-                Resource: !GetAtt TweeterFunction.Arn
+                Resource: !Ref TweeterFunction.Alias
 
   Python38Function:
     Type: AWS::Serverless::Function
