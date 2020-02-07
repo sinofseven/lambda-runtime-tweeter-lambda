@@ -1,7 +1,7 @@
 SHELL = /usr/bin/env bash -xeuo pipefail
 
 stack_name:=lambda-runtime-tweeter-lambda
-template_path:=.aws-sam/packaged.yml
+template_path:=packaged.yml
 
 isort:
 	poetry run isort -rc src
