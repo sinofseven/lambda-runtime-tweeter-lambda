@@ -46,3 +46,79 @@ Resources:
     Properties:
       LogGroupName: !Sub /aws/lambda/${TweeterFunction}
       RetentionInDays: 14
+
+  TweeterErrorMetricFilter:
+    Type: AWS::Logs::MetricFilter
+    Properties:
+      FilterPattern: "error_message"
+      LogGroupName: !Ref TweeterLogGroup
+      MetricTransformations:
+        - MetricName: TweeterError
+          MetricNamespace: LambdaErrors
+          MetricValue: "1"
+
+  TweeterErrorAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: TweeterError
+      ActionsEnabled: true
+      MetricName: TweeterError
+      Namespace: LambdaErrors
+      Statistic: Sum
+      Period: 60
+      EvaluationPeriods: 1
+      Threshold: 1.0
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      AlarmActions:
+        - !Ref AlertSNSTopic
+
+  TweeterTimeoutMetricFilter:
+    Type: AWS::Logs::MetricFilter
+    Properties:
+      FilterPattern: "Task timed out after"
+      LogGroupName: !Ref TweeterLogGroup
+      MetricTransformations:
+        - MetricName: TweeterTimeout
+          MetricNamespace: LambdaTimeouts
+          MetricValue: "1"
+
+  TweeterTimeoutAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: TweeterTimeout
+      ActionsEnabled: true
+      MetricName: TweeterTimeout
+      Namespace: LambdaTimeouts
+      Statistic: Sum
+      Period: 60
+      EvaluationPeriods: 1
+      Threshold: 1.0
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      AlarmActions:
+        - !Ref AlertSNSTopic
+
+  TweeterAbortMetricFilter:
+    Type: AWS::Logs::MetricFilter
+    Properties:
+      FilterPattern: "Process exited before completing request"
+      LogGroupName: !Ref TweeterLogGroup
+      MetricTransformations:
+        - MetricName: TweeterAbort
+          MetricNamespace: LambdaAborts
+          MetricValue: "1"
+
+  TweeterAbortAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: TweeterAbort
+      ActionsEnabled: true
+      MetricName: TweeterAbort
+      Namespace: LambdaAborts
+      Statistic: Sum
+      Period: 60
+      EvaluationPeriods: 1
+      Threshold: 1.0
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      AlarmActions:
+        - !Ref AlertSNSTopic
+
