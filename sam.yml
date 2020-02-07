@@ -151,8 +151,3 @@ Resources:
       MemorySize: 128
       Timeout: 60
       Role: !GetAtt GetRuntimeRole.Arn
-      EventInvokeConfig:
-        DestinationConfig:
-          OnSuccess:
-            Type: Lambda
-            Destination: !Ref TweeterFunction.Alias
