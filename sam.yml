@@ -151,7 +151,7 @@ Resources:
       MemorySize: 128
       Timeout: 60
       Role: !GetAtt GetRuntimeRole.Arn
-      EventInvokeConfiguration:
+      EventInvokeConfig:
         DestinationConfig:
           OnSuccess:
             Type: Lambda
