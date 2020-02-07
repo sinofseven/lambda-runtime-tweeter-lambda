@@ -156,3 +156,9 @@ Resources:
           OnSuccess:
             Type: Lambda
             Destination: !Ref TweeterFunction.Alias
+      Events:
+        Daily:
+          Type: Schedule
+          Properties:
+            Enabled: true
+            Schedule: cron(0 0 * * ? *)
