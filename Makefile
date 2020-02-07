@@ -11,10 +11,7 @@ black:
 
 format: isort black
 
-clean:
-	find src -name requirements.txt | xargs rm -f
-
-build: clean
+build:
 	poetry run sam build -t sam.yml
 
 package: build
