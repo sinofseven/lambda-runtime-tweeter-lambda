@@ -15,10 +15,7 @@ clean:
 	find src -name requirements.txt | xargs rm -f
 
 build: clean
-	poetry install --no-dev
-	poetry run pip freeze > src/tweet/requirements.txt
-	poetry install
-	poetry run sam build -t sam.yml --use-container
+	poetry run sam build -t sam.yml
 
 package: build
 	poetry run sam package \

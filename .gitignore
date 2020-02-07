@@ -241,5 +241,4 @@ dist
 # === custom ===
 /tmp/
 /.idea/
-requirements.txt
 /.aws-sam/
