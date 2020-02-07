@@ -139,7 +139,7 @@ Resources:
             Statement:
               - Effect: Allow
                 Action:
-                  - lambda:invoke
+                  - lambda:InvokeFunction
                 Resource: !Ref TweeterFunction.Alias
 
   Python38Function:
