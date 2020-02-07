@@ -31,6 +31,15 @@ Resources:
       Timeout: 150
       Layers:
         - !Ref DependenciesLayer
+      Policies:
+        - arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess
+        - Version: 2012-10-17
+          Statement:
+            - Effect: Allow
+              Action:
+                - kms:Decrypt
+              Resource:
+                - "*"
 
   TweeterLogGroup:
     Type: AWS::Logs::LogGroup
