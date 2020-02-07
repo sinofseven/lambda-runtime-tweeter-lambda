@@ -16,6 +16,11 @@ Resources:
   AlertSNSTopic:
     Type: AWS::SNS::Topic
 
+  DependenciesLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      ContentUri: src/layer
+
   TweeterFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -24,6 +29,8 @@ Resources:
       Runtime: python3.7
       MemorySize: 512
       Timeout: 150
+      Layers:
+        - !Ref DependenciesLayer
 
   TweeterLogGroup:
     Type: AWS::Logs::LogGroup

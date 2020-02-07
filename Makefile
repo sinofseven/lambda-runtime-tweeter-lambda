@@ -12,12 +12,19 @@ black:
 format: isort black
 
 build:
-	poetry run sam build -t sam.yml
+	cd src/layer; \
+	docker build -t my-build .; \
+	docker run --name my-container my-build pip3 install -r requirements.txt -t ./python; \
+	docker cp my-container:/workdir/python .; \
+	docker rm my-container; \
+	docker rmi my-build; \
+	cd ../../
 
 package: build
 	poetry run sam package \
 		--s3-bucket $$ARTIFACT_BUCKET \
-		--output-template-file $(template_path)
+		--output-template-file $(template_path) \
+		--template-file sam.yml
 
 deploy: package
 	poetry run sam deploy \
