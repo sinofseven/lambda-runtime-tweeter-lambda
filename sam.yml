@@ -162,3 +162,45 @@ Resources:
           Properties:
             Enabled: true
             Schedule: cron(0 0 * * ? *)
+
+  Python37Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/python
+      Handler: index.handler
+      Runtime: python3.7
+      MemorySize: 128
+      Timeout: 60
+      Role: !GetAtt GetRuntimeRole.Arn
+      EventInvokeConfig:
+        DestinationConfig:
+          OnSuccess:
+            Type: Lambda
+            Destination: !Ref TweeterFunction.Alias
+      Events:
+        Daily:
+          Type: Schedule
+          Properties:
+            Enabled: true
+            Schedule: cron(0 0 * * ? *)
+
+  Python36Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/python
+      Handler: index.handler
+      Runtime: python3.6
+      MemorySize: 128
+      Timeout: 60
+      Role: !GetAtt GetRuntimeRole.Arn
+      EventInvokeConfig:
+        DestinationConfig:
+          OnSuccess:
+            Type: Lambda
+            Destination: !Ref TweeterFunction.Alias
+      Events:
+        Daily:
+          Type: Schedule
+          Properties:
+            Enabled: true
+            Schedule: cron(0 0 * * ? *)
