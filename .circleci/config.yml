@@ -20,6 +20,11 @@ jobs:
 
             poetry config virtualenvs.in-project true
             poetry install
+
+            if [ -d src/layer/python ]; then
+            else
+              make build
+            fi
       - save_cache:
           paths:
             - .venv

@@ -20,7 +20,7 @@ build:
 	docker rmi my-build; \
 	cd ../../
 
-package: build
+package:
 	poetry run sam package \
 		--s3-bucket $$ARTIFACT_BUCKET \
 		--output-template-file $(template_path) \
