@@ -246,3 +246,24 @@ Resources:
           Properties:
             Enabled: true
             Schedule: cron(0 0 * * ? *)
+
+  Ruby25Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/ruby
+      Handler: index.handler
+      Runtime: ruby2.5
+      MemorySize: 128
+      Timeout: 60
+      Role: !GetAtt GetRuntimeRole.Arn
+      EventInvokeConfig:
+        DestinationConfig:
+          OnSuccess:
+            Type: Lambda
+            Destination: !Ref TweeterFunction.Alias
+      Events:
+        Daily:
+          Type: Schedule
+          Properties:
+            Enabled: true
+            Schedule: cron(0 0 * * ? *)
