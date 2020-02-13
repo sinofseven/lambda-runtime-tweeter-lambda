@@ -182,7 +182,7 @@ Resources:
           Type: Schedule
           Properties:
             Enabled: true
-            Schedule: cron(0 0 * * ? *)
+            Schedule: cron(15 0 * * ? *)
 
   Python36Function:
     Type: AWS::Serverless::Function
@@ -203,7 +203,7 @@ Resources:
           Type: Schedule
           Properties:
             Enabled: true
-            Schedule: cron(0 0 * * ? *)
+            Schedule: cron(30 0 * * ? *)
 
   Python27Function:
     Type: AWS::Serverless::Function
@@ -224,7 +224,7 @@ Resources:
           Type: Schedule
           Properties:
             Enabled: true
-            Schedule: cron(0 0 * * ? *)
+            Schedule: cron(45 0 * * ? *)
 
 
   Node10Function:
@@ -246,7 +246,7 @@ Resources:
           Type: Schedule
           Properties:
             Enabled: true
-            Schedule: cron(0 0 * * ? *)
+            Schedule: cron(0 1 * * ? *)
 
   Node12Function:
     Type: AWS::Serverless::Function
@@ -267,7 +267,7 @@ Resources:
           Type: Schedule
           Properties:
             Enabled: true
-            Schedule: cron(0 0 * * ? *)
+            Schedule: cron(15 1 * * ? *)
 
   Ruby25Function:
     Type: AWS::Serverless::Function
@@ -288,4 +288,4 @@ Resources:
           Type: Schedule
           Properties:
             Enabled: true
-            Schedule: cron(0 0 * * ? *)
+            Schedule: cron(30 1 * * ? *)

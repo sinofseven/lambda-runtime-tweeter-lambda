@@ -9,6 +9,9 @@ jobs:
       - setup_remote_docker
       - restore_cache:
           keys:
+            - layer-{{ checksum "src/layer/Dockerfile" }}-{{ checksum "src/layer/requirements.txt" }}
+      - restore_cache:
+          keys:
             - poetry-{{ checksum "pyproject.toml" }}-{{ checksum "poetry.lock" }}
       - run:
           name: install dependencies
