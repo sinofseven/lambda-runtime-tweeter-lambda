@@ -28,6 +28,10 @@ jobs:
           paths:
             - .venv
           key: poetry-{{ checksum "pyproject.toml" }}-{{ checksum "poetry.lock" }}
+      - save_cache:
+          paths:
+            - src/layer/python
+          key: layer-{{ checksum "src/layer/Dockerfile" }}-{{ checksum "src/layer/requirements.txt" }}
       - run:
           name: install dependencies
           command: |
