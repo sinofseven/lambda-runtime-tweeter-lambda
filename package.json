@@ -1,0 +1,19 @@
+{
+  "name": "lambda-runtime-tweeter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://github-private/sinofseven/lambda-runtime-tweeter-lambda"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "aws-sdk": "^2.617.0"
+  }
+}
