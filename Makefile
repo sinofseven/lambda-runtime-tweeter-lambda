@@ -30,7 +30,7 @@ deploy: package
 	poetry run sam deploy \
 		--stack-name $(stack_name) \
 		--template-file $(template_path) \
-		--capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND \
+		--capabilities CAPABILITY_IAM \
 		--no-fail-on-empty-changeset \
 		--role-arn $$CLOUDFORMATION_DEPLOY_ROLE_ARN
 
