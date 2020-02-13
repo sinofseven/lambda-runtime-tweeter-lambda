@@ -21,8 +21,7 @@ jobs:
             poetry config virtualenvs.in-project true
             poetry install
 
-            if [ -d src/layer/python ]; then
-            else
+            if [ ! -d src/layer/python ]; then
               make build
             fi
       - save_cache:
