@@ -1,0 +1,49 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: Lambda Runtime Tweeter
+
+Parameters:
+  Env:
+    Type: String
+
+  DestinationLambdaArn:
+    Type: String
+
+  RoleArn:
+    Type: String
+
+  Handler:
+    Type: String
+
+  Runtime:
+    Type: String
+
+  CodeUri:
+    Type: String
+
+Globals:
+  Function:
+    AutoPublishAlias: !Ref Env
+
+Resources:
+  GetRuntimeVersionFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: !Ref CodeUri
+      Handler: !Ref Handler
+      Runtime: !Ref Runtime
+      MemorySize: 128
+      Timeout: 60
+      Role: !Ref RoleArn
+      EventInvokeConfig:
+        DestinationConfig:
+          OnSuccess:
+            Type: Lambda
+            Destination: !Ref DestinationLambdaArn
+      Events:
+        Daily:
+          Type: Schedule
+          Properties:
+            Enabled: true
+            Schedule: cron(0 0 * * ? *)
