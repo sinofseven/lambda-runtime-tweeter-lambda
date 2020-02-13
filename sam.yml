@@ -142,18 +142,6 @@ Resources:
                   - lambda:InvokeFunction
                 Resource: !Ref TweeterFunction.Alias
 
-  Python38Resources:
-    Type: AWS::CloudFormation::Stack
-    Properties:
-      TemplateURL: function.yml
-      Parameters:
-        Env: !Ref Env
-        DestinationLambdaArn: !Ref TweeterFunction.Alias
-        RoleArn: !GetAtt GetRuntimeRole.Arn
-        Handler: index.handler
-        Runtime: python3.8
-        CodeUri: src/python
-
   Python38Function:
     Type: AWS::Serverless::Function
     Properties:
