@@ -205,28 +205,6 @@ Resources:
             Enabled: true
             Schedule: cron(30 0 * * ? *)
 
-  Python27Function:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: src/python
-      Handler: index.handler
-      Runtime: python2.7
-      MemorySize: 128
-      Timeout: 60
-      Role: !GetAtt GetRuntimeRole.Arn
-      EventInvokeConfig:
-        DestinationConfig:
-          OnSuccess:
-            Type: Lambda
-            Destination: !Ref TweeterFunction.Alias
-      Events:
-        Daily:
-          Type: Schedule
-          Properties:
-            Enabled: true
-            Schedule: cron(45 0 * * ? *)
-
-
   Node10Function:
     Type: AWS::Serverless::Function
     Properties:
