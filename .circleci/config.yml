@@ -5,48 +5,19 @@ jobs:
     docker:
       - image: circleci/python:3.8.1
     steps:
-      - checkout
-      - setup_remote_docker
-      - restore_cache:
-          keys:
-            - layer-{{ checksum "src/layer/Dockerfile" }}-{{ checksum "src/layer/requirements.txt" }}
-      - restore_cache:
-          keys:
-            - poetry-{{ checksum "pyproject.toml" }}-{{ checksum "poetry.lock" }}
       - run:
           name: install dependencies
           command: |
             set -x
 
             poetry config virtualenvs.in-project true
-            poetry install
-
-            if [ ! -d src/layer/python ]; then
-              make build
-            fi
-      - save_cache:
-          paths:
-            - .venv
-          key: poetry-{{ checksum "pyproject.toml" }}-{{ checksum "poetry.lock" }}
-      - save_cache:
-          paths:
-            - src/layer/python
-          key: layer-{{ checksum "src/layer/Dockerfile" }}-{{ checksum "src/layer/requirements.txt" }}
+            poetry config --list
       - run:
-          name: install dependencies
-          command: |
-            set -x
-
-            poetry config virtualenvs.in-project true
-            make deploy
+          name: poetry check
+          command: poetry config --list
 
 workflows:
   version: 2
   deploy:
     jobs:
-      - deploy:
-          filters:
-            branches:
-              only: master
-            tags:
-              only: /v([0-9]+\.){2}[0-9]+/
+      - deploy
