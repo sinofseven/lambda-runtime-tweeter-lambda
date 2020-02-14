@@ -10,7 +10,6 @@ jobs:
           command: |
             set -x
 
-            poetry config virtualenvs.in-project true
             poetry config --list
       - run:
           name: poetry check
