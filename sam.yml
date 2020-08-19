@@ -45,6 +45,15 @@ Resources:
         Variables:
           TREND_AP_KEY: !Ref TrendApKey
           TREND_AP_SECRET: !Ref TrendApSecret
+          REND_AP_READY_TIMEOUT: 30
+          TREND_AP_TRANSACTION_FINISH_TIMEOUT: 10
+          TREND_AP_MIN_REPORT_SIZE: 1
+          TREND_AP_INITIAL_DELAY_MS: 1
+          TREND_AP_MAX_DELAY_MS: 100
+          TREND_AP_HTTP_TIMEOUT: 5
+          TREND_AP_PREFORK_MODE: False
+          TREND_AP_CACHE_DIR: /tmp/trend_cache
+          TREND_AP_LOG_FILE: STDERR"
       Layers:
         - !Ref TrendApLayer
         - !Ref DependenciesLayer
