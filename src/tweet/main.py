@@ -2,6 +2,7 @@ import boto3
 from botocore.client import BaseClient
 from jeffy.framework import setup
 from twitter import Api
+from datetime import datetime, timezone
 
 app = setup()
 
@@ -30,5 +31,6 @@ def get_message(event: dict) -> str:
 
 
 def tweet(message: str, keys: dict):
+    text = '\n'.join([f'date: {datetime.now(timezone.utc)}', message])
     resp = Api(**keys).PostUpdate(message)
     app.logger.info({"name": "tweet response", "value": resp})
