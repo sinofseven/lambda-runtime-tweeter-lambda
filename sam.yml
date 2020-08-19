@@ -38,7 +38,7 @@ Resources:
     Properties:
       CodeUri: src/tweet
       Handler: index.handler
-      Runtime: provided
+      Runtime: python3.7
       MemorySize: 512
       Timeout: 150
       Environment:
