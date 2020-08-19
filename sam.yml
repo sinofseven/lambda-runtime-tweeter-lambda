@@ -8,6 +8,18 @@ Parameters:
     Type: String
     Default: current
 
+  TrendApKey:
+    Type: AWS::SSM::Parameter::Value<String>
+    Default: /twitter/tmco/trend_ap_key
+
+  TrendApSecret:
+    Type: AWS::SSM::Parameter::Value<String>
+    Default: /twitter/tmco/trend_ap_secret
+
+  TrendApLayer:
+    Type: AWS::SSM::Parameter::Value<String>
+    Default: /twitter/tmco/trend_ap_layer
+
 Globals:
   Function:
     AutoPublishAlias: !Ref Env
@@ -26,10 +38,15 @@ Resources:
     Properties:
       CodeUri: src/tweet
       Handler: index.handler
-      Runtime: python3.7
+      Runtime: provided
       MemorySize: 512
       Timeout: 150
+      Environment:
+        Variables:
+          TREND_AP_KEY: !Ref TrendApKey
+          TREND_AP_SECRET: !Ref TrendApSecret
       Layers:
+        - !Ref TrendApLayer
         - !Ref DependenciesLayer
       Policies:
         - arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess
