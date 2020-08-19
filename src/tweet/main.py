@@ -32,5 +32,6 @@ def get_message(event: dict) -> str:
 
 def tweet(message: str, keys: dict):
     text = '\n'.join([f'date: {datetime.now(timezone.utc)}', message])
+    app.logger.info({"message": text})
     resp = Api(**keys).PostUpdate(message)
     app.logger.info({"name": "tweet response", "value": resp})
