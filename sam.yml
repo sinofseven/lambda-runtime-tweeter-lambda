@@ -273,6 +273,27 @@ Resources:
             Enabled: true
             Schedule: cron(15 1 * * ? *)
 
+  Node14Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/node
+      Handler: index.handler
+      Runtime: nodejs14.x
+      MemorySize: 128
+      Timeout: 60
+      Role: !GetAtt GetRuntimeRole.Arn
+      EventInvokeConfig:
+        DestinationConfig:
+          OnSuccess:
+            Type: Lambda
+            Destination: !Ref TweeterFunction.Alias
+      Events:
+        Daily:
+          Type: Schedule
+          Properties:
+            Enabled: true
+            Schedule: cron(20 1 * * ? *)
+
   Ruby25Function:
     Type: AWS::Serverless::Function
     Properties:
